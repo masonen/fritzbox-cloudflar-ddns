@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  dnscron:
+    build:
+      context: ./dnscron
+      args:
+        PGID: "${PGID}"
+        PUID: "${PUID}"
+    environment:
+      MYFRITZ_URL: "${MYFRITZ_URL}"
+    volumes:
+      - ./dnscron/ip:/ip:rw
+    user: "${PUID}:${PGID}"
+    restart: unless-stopped
